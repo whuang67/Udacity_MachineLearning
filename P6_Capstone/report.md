@@ -66,14 +66,7 @@ The rest 8 variables in our dataset are all categorical variables. They are "job
 From the description and plots above, I have a couple of observations here.
 
 __1.__ Variable `poutcome` contains more than 35000 missing values here. Even though as a categorical variable, missing values can be considered as another category. I strongly do not think that the frequency of missing values is as large as this is a good idea. Hence, variable `poutcome` will not be considered in the following parts.  
-__2.__ Almost all observations have `default` value being "no". This variable may be highly correlated with our response variable `y`. I would like to perform Person Chi-square test to find the additional evidence.
-
-| y\default |   no  | yes |
-|:---------:|:-----:|:---:|
-|     no    | 39158 | 763 |
-|    yes    |  5237 |  52 |
-
-The Chi-square and corresponding p-value are 22.204 and 0.000 respectively. We should reject the null hypothesis of no association between these two variables. In the following part, I will consider using this variable `default` to make our benchmark model.
+__2.__ There are still other variables that have missing values here, like `contact`, `education` and `job`. We will try to treat those values as another category of the corresponding variables.
 
 ### 2.5 Summary
 
@@ -95,6 +88,14 @@ old_y  new_y
 ```
 
 ### 3.3 Metric
-At the beginning, we have found out that our response variable `y` does not follow a balanced distribution. Hence, apart from the overall `accuracy`, I would also like to check the Receiver Operating Characteristic curve (`ROC curve`) and calculate the corresponding Area under the Curve (`AUC`).
+`Accuracy` and the `AUC` (area under the curve) of `ROC curve` are the metrics that we are about to use here. `Accuracy` ranging from 0 to 1 stands for the percentage of correct classification that we have maded. The higher accuracy is, the better our model is.
 
-The x-axis and y-axis of `ROC curve` are False Positive Rate (1-Specificty) and True Positive Rates (Sensitivity).
+This is a binary classification problem, which gives us an opportunity to use the `ROC curve` and `AUC` to concentrate not only the accuracy but also the specificity and sensitivity. `ROC curve` and `AUC` will make more sense if our response do not approximately evenly distribute (around 50%:50%). At the beginning, we have already found out that our response variable `y` does not follow a balanced distribution.
+
+The x-axis and y-axis of `ROC curve` are False Positive Rate (1-Specificty) and True Positive Rates (Sensitivity). The curve should be at least above the diagonal line, or the model is meaningless. Hence, we can know that the range of `AUC` must be between 0.5 and 1. And the greater the `AUC` is, the better performance that we will have.
+
+In addition to these two, I would also like to record the `running time` that we should spend on each algorithm that we are about to try. We may take this one into consideration if the performance of several algorithms are alike but the running time are dramatically different.
+
+## 4. Model Fitting
+### 4.1 Benchmark Model
+Ususally, older people tend to have a higher willing to subscribed term deposit since they are less open to the risk because of family, physical issues and/or some other reasons. Hence, our benchmark model would be set based on variable age only. If age is greater than 35, we predict those people have subscribed term deposit already. If age is less than or equal to 35, we don’t think they have subscribed it yet.
