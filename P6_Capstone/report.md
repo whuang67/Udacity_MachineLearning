@@ -81,10 +81,17 @@ For the extreme `previous` value, I would like to remove this point from our dat
 ### 3.2 One-hot Encoding
 One-hot encoding here is used to transform the 7 categorical variables and response variable `y` into numerical ones. For one particular variable `var`, the number of new variables `var_new` after being one-hot encoded is equal to the level of this variable `var` minus one.
 
-Particularly, the new response variable `y` looks like the following part after we perform 
+Particularly, for the response variable `y`, value "no" and "yes" will be converted to 0 and 1, respectively. 
 
 ```sql
-old_y  new_y
+old_y|new_y
+  no |  0
+  no |  0
+  no |  0
+ ...   ...
+ yes |  1
+  no |  0
+  no |  0
 ```
 
 ### 3.3 Metric
@@ -96,6 +103,13 @@ The x-axis and y-axis of `ROC curve` are False Positive Rate (1-Specificty) and 
 
 In addition to these two, I would also like to record the `running time` that we should spend on each algorithm that we are about to try. We may take this one into consideration if the performance of several algorithms are alike but the running time are dramatically different.
 
+### 3.4 Feature Selection
+We have 13 features in our project, but we may not want to use all of them. Because too many predictors may lead to over-fitting which indicates that our models only work well on training set instead of testing set. We absolutely do not want that happen. Therefore, before we jump into the next part, we would like to select the features that we are about to use.
+
+The method that I would like to choose is `Decision Tree` algorithm with the "Information Gain" splitting criterion. After we build the model with all features as predictors, I would like to calculate their variable importance, and select the features based on them.
+
 ## 4. Model Fitting
 ### 4.1 Benchmark Model
 Ususally, older people tend to have a higher willing to subscribed term deposit since they are less open to the risk because of family, physical issues and/or some other reasons. Hence, our benchmark model would be set based on variable age only. If age is greater than 35, we predict those people have subscribed term deposit already. If age is less than or equal to 35, we don’t think they have subscribed it yet.
+
+### 4.2 Logistic Regression
