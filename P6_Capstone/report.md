@@ -23,7 +23,7 @@ Obviously, our response variable `y` here does not follow a balanced distributio
 
 There are two variables `day` and `month` in our dataset which stand for last contact day of month and last contact month of year, respectively. I think that these two variables should be considered as categorical variables even though variable `day` were recorded by using numerical values. Because the values of these two variables do not actually have the corresponding quantitative meanings here. Instead, these two are kind of the time index of the last contact time.
 
-Hence, I would like not to take these two variables into consideration for the rest of this project.
+Hence, I would like not to take these two variables into consideration for the rest of this project. We may also consider removing additional variables in the following parts.
 
 ### 2.3 Continuous Variables
 
@@ -50,7 +50,7 @@ Since we remove only 1 observation, the distribution of our response variable `y
 
 ### 2.4 Categorical Variables
 
-The rest 8 variables in our dataset are all categorical variables. They are "job", "marital", "education", "default", "housing", "loan", "contact" and "poutcome". The description of them are shown below.
+The rest 8 variables in our dataset are all categorical variables. They are "job", "marital", "education", "default", "housing", "loan", "contact" and "poutcome". The description and barplots of them are shown below.
 
 - job: type of job ("admin.", "blue-collar", "entrepreneur", "housemaid", "management", "retired", "selfemployed", "services", "student", "technician", "unemployed", "unknown")
 - marital: marital status ("divorced", "married", "single", "unknown"; note: "divorced" means divorced or widowed)
@@ -60,3 +60,23 @@ The rest 8 variables in our dataset are all categorical variables. They are "job
 - loan: has personal loan? ("no", "yes")
 - contact: contact communication type ("cellular", "telephone", "unknown")
 - poutcome: outcome of the previous marketing campaign ("failure", "other", "success", "unknown")
+
+![plot3](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/plot3.png?raw=true)
+
+From the description and plots above, I have a couple of observations here.
+
+__1.__ Variable `poutcome` contains more than 35000 missing values here. Even though as a categorical variable, missing values can be considered as another category. I strongly do not think that the frequency of missing values is as large as this is a good idea. Hence, variable `poutcome` will not be considered in the following parts.  
+__2.__ Almost all observations have `default` value being "no". This variable may be highly correlated with our response variable `y`. I would like to perform Person Chi-square test to find the additional evidence.
+
+| y\default |   no  | yes |
+|:---------:|:-----:|:---:|
+|     no    | 39158 | 763 |
+|    yes    |  5237 |  52 |
+
+The Chi-square and corresponding p-value are 22.204 and 0.000 respectively. We should reject the null hypothesis of no association between these two variables. In the following part, I will consider using this variable `default` to make our benchmark model.
+
+### 2.5 Summary
+
+In this part, we removed three variables `day`, `month` and `poutcome` and one observation with extremely high `previous` value. The dataset now contains 6 continuous variables, 7 categorical variables and 45120 observations in total.
+
+## 3. Preprocessing
