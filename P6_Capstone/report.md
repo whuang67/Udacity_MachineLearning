@@ -33,7 +33,7 @@ There are 6 continous variables in our dataset. They are "age", "balance", "dura
 - balance: the current balance in the bank
 - duration: last contact duration, in seconds (numeric). __Important note__: this attribute highly affects the output target (e.g., if duration=0 then y="no"). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model.
 - campaign: number of contacts performed during this campaign and for this client (numeric, includes last contact)
-- pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric; 999 means client was not previously contacted)
+- pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric)
 - previous: number of contacts performed before this campaign and for this client (numeric)
 
 ![scatter](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/scatter.png?raw=true)
@@ -41,7 +41,7 @@ There are 6 continous variables in our dataset. They are "age", "balance", "dura
 From the description and plot above, I have several observations here.
 
 __1.__ Variable `duration` is highly correlated with our response variable `y`. If `duration` is 0, then `y` has to be "no".  
-__2.__ The value 999 of variable `pdays` does not actually stands for 999 days that passed by after the client was last contacted from a previous compaign. What it actually indicates is missing values and that this client has never been contacted before. But actually there is no point with 999 `pdays` value.  
+__2.__ It is very hard to visually detect any obvious linear correlationship between different groups of two variables. The distributions of all these six variables are positively skewed.  
 __3.__ There is one observation with extremely high `previous` value. We would like to remove that point to lower the influence that may be brought from that observation. The new scatter plot is shown below, and it looks much better.
 
 ![scatter2](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/scatter2.png?raw=true)
@@ -80,3 +80,22 @@ The Chi-square and corresponding p-value are 22.204 and 0.000 respectively. We s
 In this part, we removed three variables `day`, `month` and `poutcome` and one observation with extremely high `previous` value. The dataset now contains 6 continuous variables, 7 categorical variables and 45120 observations in total.
 
 ## 3. Preprocessing
+### 3.1 One-hot Encoding
+One-hot encoding here is used to transform the 7 categorical variables and response variable `y` into numerical ones. For one particular variable `var`, the number of new variables `var_new` after being one-hot encoded is equal to the level of this variable `var` minus one.
+
+Particularly, the new response variable `y` looks like the following part after we perform 
+
+```sql
+old_y  new_y
+```
+
+### 3.2 Logarithm Transformation
+As we have mentioned above, the distributions of all six numerica variables here are obviously or slightly positively skewed. Here, I would like to perform logarithm transformation on variable `duration` and the check the new distributions. Because this variable seems to follow log-normal distribution based on the scatter plot that we have drawn above. The new scatter matrix plot with diagonal being density plot are shown below.
+
+Because the minimum value of variable `duration` is 0. We would like to add 1 to each value of variable `duration` to make the logarithm transformation meaningful. The formula is:
+
+$$duration = log(duration + 1)$$
+
+![scatter4](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/scatter4.png?raw=true)
+
+As expected, the variable `duration` after transformation follows normal distribution visually. And we still cannot detect obvious correlationship between different variables. In this case, I would like to replace our old variable `duration` with the new one that we just generated.
