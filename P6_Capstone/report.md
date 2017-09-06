@@ -106,7 +106,14 @@ In addition to these two, I would also like to record the `running time` that we
 ### 3.4 Feature Selection
 We have 13 features in our project, but we may not want to use all of them. Because too many predictors may lead to over-fitting which indicates that our models only work well on training set instead of testing set. We absolutely do not want that happen. Therefore, before we jump into the next part, we would like to select the features that we are about to use.
 
-The method that I would like to choose is `Decision Tree` algorithm with the "Information Gain" splitting criterion. After we build the model with all features as predictors, I would like to calculate their variable importance, and select the features based on them.
+The method that I would like to choose is `Decision Tree` algorithm with the "Gini" splitting criterion. After we build the model with all features as predictors, I would like to calculate their variable importance, and visually present the results by using a horizontal bar plot.
+
+![plot5](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/plot5.png?raw=true)
+
+We can find out that variable `duration`, `balance`, `age`, `pdays`, `housing` (binary variable, housing_yes in the plot) and `campaign` obviously greater than other variables. There also seems to be an "elbow" which divide these six variables from the rest. Hence, I would like to use these six variables as our final predictors to build our classifiers.
+
+### 3.5 Training and Testing Splitting
+
 
 ## 4. Model Fitting
 ### 4.1 Benchmark Model
