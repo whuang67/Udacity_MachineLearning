@@ -80,7 +80,12 @@ The Chi-square and corresponding p-value are 22.204 and 0.000 respectively. We s
 In this part, we removed three variables `day`, `month` and `poutcome` and one observation with extremely high `previous` value. The dataset now contains 6 continuous variables, 7 categorical variables and 45120 observations in total.
 
 ## 3. Preprocessing
-### 3.1 One-hot Encoding
+### 3.1 Outliers and Invalid Values
+As we have mentioned above, there is one observation with extremely high `previous` value and variable `poutcome` contains more than 35000 missing values which were recorded as "unknown".
+
+For the extreme `previous` value, I would like to remove this point from our dataset. For the variable `poutcome`, I would like to remove the whole variable entirely. We do notice that there are some other categorical variables with "unknown" values. Since the proportions of them are not extremely large, we would like to treat "unknown" value as a new category of the corresponding variables.
+
+### 3.2 One-hot Encoding
 One-hot encoding here is used to transform the 7 categorical variables and response variable `y` into numerical ones. For one particular variable `var`, the number of new variables `var_new` after being one-hot encoded is equal to the level of this variable `var` minus one.
 
 Particularly, the new response variable `y` looks like the following part after we perform 
@@ -89,13 +94,7 @@ Particularly, the new response variable `y` looks like the following part after 
 old_y  new_y
 ```
 
-### 3.2 Logarithm Transformation
-As we have mentioned above, the distributions of all six numerica variables here are obviously or slightly positively skewed. Here, I would like to perform logarithm transformation on variable `duration` and the check the new distributions. Because this variable seems to follow log-normal distribution based on the scatter plot that we have drawn above. The new scatter matrix plot with diagonal being density plot are shown below.
+### 3.3 Metric
+At the beginning, we have found out that our response variable `y` does not follow a balanced distribution. Hence, apart from the overall `accuracy`, I would also like to check the Receiver Operating Characteristic curve (`ROC curve`) and calculate the corresponding Area under the Curve (`AUC`).
 
-Because the minimum value of variable `duration` is 0. We would like to add 1 to each value of variable `duration` to make the logarithm transformation meaningful. The formula is:
-
-$$duration = log(duration + 1)$$
-
-![scatter4](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/scatter4.png?raw=true)
-
-As expected, the variable `duration` after transformation follows normal distribution visually. And we still cannot detect obvious correlationship between different variables. In this case, I would like to replace our old variable `duration` with the new one that we just generated.
+The x-axis and y-axis of `ROC curve` are False Positive Rate (1-Specificty) and True Positive Rates (Sensitivity).
