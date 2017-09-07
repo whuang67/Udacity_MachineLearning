@@ -95,13 +95,15 @@ old_y|new_y
 ```
 
 ### 3.3 Metric
-`Accuracy` and the `AUC` (area under the curve) of `ROC curve` are the metrics that we are about to use here. `Accuracy` ranging from 0 to 1 stands for the percentage of correct classification that we have maded. The higher accuracy is, the better our model is.
+`Accuracy`, `precision` and `recall` are the metrics that we are about to use here. All these three metrics range from 0 to 1. The higher the values is, the better our model is. The formulas of them are shown below:
 
-This is a binary classification problem, which gives us an opportunity to use the `ROC curve` and `AUC` to concentrate not only the accuracy but also the specificity and sensitivity. `ROC curve` and `AUC` will make more sense if our response do not approximately evenly distribute (around 50%:50%). At the beginning, we have already found out that our response variable `y` does not follow a balanced distribution.
+$$accuracy = \displaystyle{\frac{TP+TN}{TP+TN+FP+FN}}$$  
+$$precision = \displaystyle{\frac{TP}{TP+TN+FP+FN}}$$  
+$$recall = \displaystyle{\frac{TP}{TP+TN+FP+FN}}$$
 
-The x-axis and y-axis of `ROC curve` are False Positive Rate (1-Specificty) and True Positive Rates (Sensitivity). The curve should be at least above the diagonal line, or the model is meaningless. Hence, we can know that the range of `AUC` must be between 0.5 and 1. And the greater the `AUC` is, the better performance that we will have.
+where `TP`, `TN`, `FP` and `FN` stand for True positive, True negative, False positive and False negative, respectively. We can read that `accuracy` mainly focuses on the overall correct classification for both positive and negative label while `precision` and `recall` concentrate on correct classification for positive label (in this project it means `y` equal to "yes") only.
 
-In addition to these two, I would also like to record the `running time` that we should spend on each algorithm that we are about to try. We may take this one into consideration if the performance of several algorithms are alike but the running time are dramatically different.
+In addition to these three, I would also like to record the `running time` that we should spend on each algorithm that we are about to try. We may take this one into consideration if the performance of several algorithms are alike but the running time are dramatically different.
 
 ### 3.4 Feature Selection
 We have 13 features in our project, but we may not want to use all of them. Because too many predictors may lead to over-fitting which indicates that our models only work well on training set instead of testing set. We absolutely do not want that happen. Therefore, before we jump into the next part, we would like to select the features that we are about to use.
@@ -113,10 +115,23 @@ The method that I would like to choose is `Decision Tree` algorithm with the "Gi
 We can find out that variable `duration`, `balance`, `age`, `pdays`, `housing` (binary variable, housing_yes in the plot) and `campaign` obviously greater than other variables. There also seems to be an "elbow" which divide these six variables from the rest. Hence, I would like to use these six variables as our final predictors to build our classifiers.
 
 ### 3.5 Training and Testing Splitting
+We would like to split the whole dataset into training and testing subsets randomly. Here, we also will use stratified split here since the distribution of our response variable `y` does not follow a balanced distribution. The training set contains 36168 (80%) observations and the testing set contains the rest 9042 (20%) ones.
 
+|          y          |  yes  |   no  | total |
+|:-------------------:|:-----:|:-----:|:-----:|
+|  Training Frequency | 31937 |  4231 | 36168 |
+| Training Percentage | 88.3% | 11.7% |  100% |
+|  Testing Frequency  |  7984 |  1058 |  9042 |
+|   Test Percentage   | 88.3% | 11.&% |  100% |
+
+The distribution of response variable `y` of both training and testing sets are shown above. The percentages of "yes" and "no" of both training and testing are basically equal to the corresponding percentages of the whole dataset.
 
 ## 4. Model Fitting
 ### 4.1 Benchmark Model
-Ususally, older people tend to have a higher willing to subscribed term deposit since they are less open to the risk because of family, physical issues and/or some other reasons. Hence, our benchmark model would be set based on variable age only. If age is greater than 35, we predict those people have subscribed term deposit already. If age is less than or equal to 35, we don’t think they have subscribed it yet.
+Ususally, older people tend to have a higher willing to subscribed term deposit since they are less open to the risk because of family, physical issues and/or some other reasons. Hence, our benchmark model would be set based on variable age only. If age is greater than 65, we predict those people have subscribed term deposit already. If age is less than or equal to 65, we don’t think they have subscribed it yet.
 
 ### 4.2 Logistic Regression
+First, let us try to use `Logistic Regression` algorithm. `Logistic regression` is a regression model where our response variable is categorical. In order to restrict range of the output within 0 and 1, we will like to add a logit link function to transform from $y$ to $\displaystyle{\frac{1}{1+e^{-y}}}$. The performance of this algorithm may not be very good, but we are able to tell the quantitative relationship between predictors and response variable.
+
+### 4.3 Support Vector Machine
+Then, we would like to try `support vector machine`. We will start from `linear SVM`.
