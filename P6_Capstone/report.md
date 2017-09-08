@@ -156,3 +156,7 @@ The performances of the previous five models are shown below. For algorithm `K N
 | RF (ntree=300, mtry=2) |     99.99%     |     89.66%    |    99.98%    |    36.96%   |     100.00%     |     59.33%     |
 |  MLP N. Net (lr=.001)  |     89.11%     |     88.97%    |    29.90%    |    30.06%   |      57.37%     |     60.23%     |
 |   MLP N. Net (lr=.05)  |     89.10%     |     89.37%    |    24.25%    |    24.76%   |      58.06%     |     61.36%     |
+
+Even though the overall accuracies of our benchmark model is basically equal to the accuracies of the rest five models, the recall scores are much lower than others. We may think that the preformance of our benchmark model is OK, and the rest five are all more satisfactory than it. 
+
+Obviously, the training accuracy, recall and precision of `Random Forest` algorithm are the best and extremely close to 100%. But the corresponding testing metrics are basically not different from the other testing metrics. Here, we can think that this algorithm over-fit our dataset.
