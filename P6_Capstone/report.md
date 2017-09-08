@@ -145,3 +145,14 @@ Then, I would like to try to use `K Nearest Neighbors` algorithm. For this algor
 We know that if the learning rate is small, we may just stop at the local minima. Hence, I would also like to fit another model with a larger learning rate (0.05). Everything else will remain the same.
 
 ### 4.6 Summary
+
+The performances of the previous five models are shown below. For algorithm `K Nearest Neighbors` and `Random Forest`, we only list the ones with the best performances. For algorithm `Multilayer Perceptron Neural Network`, the result of both learning rates will be listed.
+
+|        Algorithm       | train Accuracy | test Accuracy | train Recall | test Recall | train Precision | test Precision |
+|:----------------------:|:--------------:|:-------------:|:------------:|:-----------:|:---------------:|:--------------:|
+|        Benchmark       |     88.13%     |     88.43%    |     3.88%    |    5.10%    |      41.93%     |     56.25%     |
+|      Logistic Reg.     |     88.97%     |     88.89%    |    17.16%    |    15.97%   |      59.90%     |     59.30%     |
+|       KNN (k=11)       |     90.62%     |     89.23%    |    38.48%    |    32.70%   |      67.38%     |     56.91%     |
+| RF (ntree=300, mtry=2) |     99.99%     |     89.66%    |    99.98%    |    36.96%   |     100.00%     |     59.33%     |
+|  MLP N. Net (lr=.001)  |     89.11%     |     88.97%    |    29.90%    |    30.06%   |      57.37%     |     60.23%     |
+|   MLP N. Net (lr=.05)  |     89.10%     |     89.37%    |    24.25%    |    24.76%   |      58.06%     |     61.36%     |
