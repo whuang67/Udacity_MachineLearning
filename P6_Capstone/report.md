@@ -133,5 +133,15 @@ Ususally, older people tend to have a higher willing to subscribed term deposit 
 ### 4.2 Logistic Regression
 First, let us try to use `Logistic Regression` algorithm. `Logistic regression` is a regression model where our response variable is categorical. In order to restrict range of the output within 0 and 1, we will like to add a logit link function to transform from $y$ to $\displaystyle{\frac{1}{1+e^{-y}}}$. The performance of this algorithm may not be very good, but we are able to tell the quantitative relationship between predictors and response variable.
 
-### 4.3 Support Vector Machine
-Then, we would like to try `support vector machine`. We will start from `linear SVM`.
+### 4.3 K Nearest Neighbors
+Then, I would like to try to use `K Nearest Neighbors` algorithm. For this algorithm, we calculate the distance between one point and its closest `k` different points, and then use majority vote to classify our response variable `y`. Minkowski distance with p equal to 2 which is also called Euclidean distance will be used here. We would like to use 5-fold stratified cross-validation to tune the parameter `k`, and we find out the `k` with the best performance is `7`.
+
+### 4.4 Random Forest
+`Random Forest` is a very powerful machine learning algorithm. It ensembles single tree models together and provides stronger classification. But in most case, it tends to over-fit the dataset due to its flexibility. Like the previous part, we will us 5-fold stratified cross-validation to tune the parameters `ntree` and `mtry` which stands for number of trees and attempt variables. The parameters with the best performance here is `ntree = ` and `mtry = `
+
+### 4.5 Multilayer Perceptron Neural Network
+`MLP Neural Network` consists three layers of nodes (the input layer, at least one hidden layer, and the output layer). For the hidden layers, we will choose to use the ReLU activation function. In order not to over-fit our model, the probability of each hidden layer node being dropped is set to be 0.2. Here, we will have two hidden layers and the learning rate is 0.001. Training epoch is 20.
+
+We know that if the learning rate is small, we may just stop at the local minima. Hence, I would also like to fit another model with a larger learning rate (0.05). Everything else will remain the same.
+
+### 4.6 Summary
