@@ -78,8 +78,10 @@ As we have mentioned above, there is one observation with extremely high `previo
 
 For the extreme `previous` value, I would like to remove this point from our dataset. For the variable `poutcome`, I would like to remove the whole variable entirely. We do notice that there are some other categorical variables with "unknown" values. Since the proportions of them are not extremely large, we would like to treat "unknown" value as a new category of the corresponding variables.
 
-### 3.2 One-hot Encoding
+### 3.2 One-hot Encoding and Min-max Normalization
 One-hot encoding here is used to transform the 7 categorical variables and response variable `y` into numerical ones. For one particular variable `var`, the number of new variables `var_new` after being one-hot encoded is equal to the level of this variable `var` minus one.
+
+Min-max Normalization is used to transform our 6 continuous variables. The formula is $new_var = \displaystyle{\frac{old_val - min(old_val)}{max(old_val) - min(old_val)}}$. The ranges of our new features will all be from 0 to 1.
 
 Particularly, for the response variable `y`, value "no" and "yes" will be converted to 0 and 1, respectively. 
 
@@ -173,4 +175,6 @@ We may think consider adding running time as one of our metrics, too. Because it
 We know that as model goes more complicated, the training error is keeping going down but testing error will go down first but then go back up. We may also think manually using "imperfect" tuning parameters of models like `Random Forest`. The cross-validation will give us the one with the best performance. But that one may already over-fit. If we choose "imperfect" parameters manually, we may be able to find another model with slightly worse training error but better testing error.
 
 ## Reference
-- 
+- Random Forest, Wikipedia, https://en.wikipedia.org/wiki/Random_forest
+- Machine Learning Nanodegree, Udacity, https://www.udacity.com/
+- Precision and recall, Wikipedia, https://en.wikipedia.org/wiki/Precision_and_recall
