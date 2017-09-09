@@ -1,5 +1,5 @@
-# Content: Capstone
-## Project: Capstone
+# Content: Capstone Project
+## Project: Term Deposit Classifier - Machine Learning Engineer Capstone
 
 ### Install
 
