@@ -124,7 +124,7 @@ We would like to split the whole dataset into training and testing subsets rando
 |  Training Frequency | 31937 |  4231 | 36168 |
 | Training Percentage | 88.3% | 11.7% |  100% |
 |  Testing Frequency  |  7984 |  1058 |  9042 |
-|   Test Percentage   | 88.3% | 11.&% |  100% |
+|   Test Percentage   | 88.3% | 11.7% |  100% |
 
 The distribution of response variable `y` of both training and testing sets are shown above. The percentages of "yes" and "no" of both training and testing are basically equal to the corresponding percentages of the whole dataset.
 
