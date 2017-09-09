@@ -144,7 +144,7 @@ Then, I would like to try to use `K Nearest Neighbors` algorithm. For this algor
 
 We know that if the learning rate is small, we may just stop at the local minima. Hence, I would also like to fit another model with a larger learning rate (0.05). Everything else will remain the same.
 
-### 4.6 Summary
+## 5. Summary
 
 The performances of the previous five models are shown below. For algorithm `K Nearest Neighbors` and `Random Forest`, we only list the ones with the best performances. For algorithm `Multilayer Perceptron Neural Network`, the result of both learning rates will be listed.
 
@@ -163,4 +163,14 @@ Even though the overall accuracy of our benchmark model is basically equal to th
 
 The performance of `Logistic Regression` is slightly worse than `MLP Neural Network` while that of `KNN` is a little better than `MLP Neural Network`. For these two algorithms and benchmark model, we can quantitatively explain the relationship between different features, which is their advantage. For the rest two algorithms, it is impossible to interpret the relationship but we usually tend to get better performances. The best model for different datasets should depend on different situations.
 
-We can learn from this that there is no universal best algorithm that works well on every dataset. Each algorithm has their own advantages and disadvantages.
+We can learn from this that there is no universal best algorithm that works well on every dataset. Like what we have discussed in the previous paragraph, each algorithm has their own advantages and disadvantages. For this dataset, even though the training metric values of __Random Forest__ are almost perfect, their testing metric values are also much better than others. Hence, we may still choose this model as our final and best model.
+
+## 6. Future Thoughts
+### 6.1 Running Time
+We may think consider adding running time as one of our metrics, too. Because it usually takes much longer time for complicated models like ensemble methods to get the results. If the performance of a simple model and a complicated one are basically the same, it may not be worth using the complicated one.
+
+### 6.2 Tuning Parameters
+We know that as model goes more complicated, the training error is keeping going down but testing error will go down first but then go back up. We may also think manually using "imperfect" tuning parameters of models like `Random Forest`. The cross-validation will give us the one with the best performance. But that one may already over-fit. If we choose "imperfect" parameters manually, we may be able to find another model with slightly worse training error but better testing error.
+
+## Reference
+- 
