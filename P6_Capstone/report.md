@@ -36,7 +36,7 @@ There are 6 continous variables in our dataset. They are "age", "balance", "dura
 - pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric)
 - previous: number of contacts performed before this campaign and for this client (numeric)
 
-![scatter](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/scatter.png?raw=true)
+![plot1](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/figure1.png?raw=true)
 
 From the description and plot above, I have several observations here.
 
@@ -44,7 +44,7 @@ __1.__ Variable `duration` is highly correlated with our response variable `y`. 
 __2.__ It is very hard to visually detect any obvious linear correlationship between different groups of two variables. The distributions of all these six variables are positively skewed.  
 __3.__ There is one observation with extremely high `previous` value. We would like to remove that point to lower the influence that may be brought from that observation. The new scatter plot is shown below, and it looks much better.
 
-![scatter2](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/scatter2.png?raw=true)
+![plot2](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/figure2.png?raw=true)
 
 Since we remove only 1 observation, the distribution of our response variable `y` will not change dramatically. It will still be an unbalanced distribution.
 
@@ -61,7 +61,7 @@ The rest 8 variables in our dataset are all categorical variables. They are "job
 - contact: contact communication type ("cellular", "telephone", "unknown")
 - poutcome: outcome of the previous marketing campaign ("failure", "other", "success", "unknown")
 
-![plot3](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/plot3.png?raw=true)
+![plot3](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/figure3.png?raw=true)
 
 From the description and plots above, I have a couple of observations here.
 
@@ -112,7 +112,7 @@ We have 13 features in our project, but we may not want to use all of them. Beca
 
 The method that I would like to choose is `Decision Tree` algorithm with the "Gini" splitting criterion. After we build the model with all features as predictors, I would like to calculate their variable importance, and visually present the results by using a horizontal bar plot.
 
-![plot5](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/plot5.png?raw=true)
+![plot4](https://github.com/whuang67/Udacity_Machine_Learning/blob/master/P6_Capstone/figure4.png?raw=true)
 
 We can find out that variable `duration`, `balance`, `age`, `pdays`, `housing` (binary variable, housing_yes in the plot) and `campaign` obviously greater than other variables. There also seems to be an "elbow" which divide these six variables from the rest. Hence, I would like to use these six variables as our final predictors to build our classifiers.
 
