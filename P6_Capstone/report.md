@@ -98,8 +98,8 @@ old_y|new_y
 `Accuracy`, `precision` and `recall` are the metrics that we are about to use here. All these three metrics range from 0 to 1. The higher the values is, the better our model is. The formulas of them are shown below:
 
 $$accuracy = \displaystyle{\frac{TP+TN}{TP+TN+FP+FN}}$$  
-$$precision = \displaystyle{\frac{TP}{TP+TN+FP+FN}}$$  
-$$recall = \displaystyle{\frac{TP}{TP+TN+FP+FN}}$$
+$$precision = \displaystyle{\frac{TP}{TP+FN}}$$  
+$$recall = \displaystyle{\frac{TP}{TP+FP}}$$
 
 where `TP`, `TN`, `FP` and `FN` stand for True positive, True negative, False positive and False negative, respectively. We can read that `accuracy` mainly focuses on the overall correct classification for both positive and negative label while `precision` and `recall` concentrate on correct classification for positive label (in this project it means `y` equal to "yes") only.
 
@@ -157,6 +157,10 @@ The performances of the previous five models are shown below. For algorithm `K N
 |  MLP N. Net (lr=.001)  |     89.11%     |     88.97%    |    29.90%    |    30.06%   |      57.37%     |     60.23%     |
 |   MLP N. Net (lr=.05)  |     89.10%     |     89.37%    |    24.25%    |    24.76%   |      58.06%     |     61.36%     |
 
-Even though the overall accuracies of our benchmark model is basically equal to the accuracies of the rest five models, the recall scores are much lower than others. We may think that the preformance of our benchmark model is OK, and the rest five are all more satisfactory than it. 
+Here, we mainly focus on the testing accuracy, recall and precision.
 
-Obviously, the training accuracy, recall and precision of `Random Forest` algorithm are the best and extremely close to 100%. But the corresponding testing metrics are basically not different from the other testing metrics. Here, we can think that this algorithm over-fit our dataset.
+Even though the overall accuracy of our benchmark model is basically equal to the accuracies of the rest five models, the recall score is much lower than others and the precision is slighly worse than others'. We may think that the preformance of our benchmark model is OK, and the rest five are all more satisfactory than it. Obviously, the training accuracy, recall and precision of `Random Forest` algorithm are the best and extremely close to 100%. But the corresponding testing metrics are basically not different from the other testing metrics. Here, we can think that this algorithm over-fit our dataset. For the two `MLP Neural Network` models, the results are a little unexpected. Because in my opinion, Neural Network is a good algorithm and sometimes may over-fit our dataset like `Random Forest` which we just talked about. But the performances of them here are just somewhere between `Logistic Regression` and `KNN`.
+
+The performance of `Logistic Regression` is slightly worse than `MLP Neural Network` while that of `KNN` is a little better than `MLP Neural Network`. For these two algorithms and benchmark model, we can quantitatively explain the relationship between different features, which is their advantage. For the rest two algorithms, it is impossible to interpret the relationship but we usually tend to get better performances. The best model for different datasets should depend on different situations.
+
+We can learn from this that there is no universal best algorithm that works well on every dataset. Each algorithm has their own advantages and disadvantages.
